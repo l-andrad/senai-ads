@@ -1,0 +1,9 @@
+package visualizacao;
+
+public class EntradaSaida {
+
+	public void solicitaDadosConta(){
+		
+	}
+	
+}
