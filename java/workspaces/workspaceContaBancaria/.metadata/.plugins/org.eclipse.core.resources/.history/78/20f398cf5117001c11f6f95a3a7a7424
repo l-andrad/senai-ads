@@ -30,9 +30,7 @@ public class EntradaSaida {
 			tipo = 1;
 		}
 		
-		Conta dadosDaConta = new Conta();
-		
-		dadosDaConta.criarConta(nome, tipo);
+		Conta dadosDaConta = new Conta(nome, tipo);
 		
 	}
 	
@@ -83,8 +81,8 @@ public class EntradaSaida {
 		saque.sacar(tipo, valor, data);
 	}
 	
-	public void exibirSaldo(Conta saldo) {
-		
+	public void exibirSaldo() {
+		Conta saldo = new Conta();
 		
 		double saldoAtual = saldo.consultarSaldo();
 		

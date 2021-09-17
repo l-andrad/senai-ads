@@ -1,7 +1,6 @@
 package controle;
 
 import visualizacao.EntradaSaida;
-import modelo.Conta;
 
 public class Controladora {
 
@@ -9,7 +8,6 @@ public class Controladora {
 		
 		EntradaSaida criarConta = new EntradaSaida();
 		criarConta.solicitaDadosConta();
-		Conta conta = new Conta();
 		
 		EntradaSaida operacoes = new EntradaSaida();
 		
@@ -31,7 +29,7 @@ public class Controladora {
 			break;
 			
 			case 2:
-				operacoes.exibirSaldo(conta);
+				operacoes.exibirSaldo(operacoes);
 			break;
 			
 			case 3:

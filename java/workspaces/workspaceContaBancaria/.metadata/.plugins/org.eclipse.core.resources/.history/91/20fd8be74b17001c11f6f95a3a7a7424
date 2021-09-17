@@ -30,9 +30,7 @@ public class EntradaSaida {
 			tipo = 1;
 		}
 		
-		Conta dadosDaConta = new Conta();
-		
-		dadosDaConta.criarConta(nome, tipo);
+		Conta dadosDaConta = new Conta(nome, tipo);
 		
 	}
 	
@@ -83,40 +81,12 @@ public class EntradaSaida {
 		saque.sacar(tipo, valor, data);
 	}
 	
-	public void exibirSaldo(Conta saldo) {
-		
+	public void exibirSaldo() {
+		Conta saldo = new Conta();
 		
 		double saldoAtual = saldo.consultarSaldo();
 		
 		JOptionPane.showMessageDialog(null, "Seu saldo atual é de: R$" +saldoAtual);
-	}
-	
-	public void exibirDadosDaConta() {
-		Conta dados = new Conta();
-		
-		String nomeTitular = dados.getTitularDaConta();
-		int tipoNum = dados.getTipo();
-		String tipoDaConta, dadosDaConta;
-		double saldo = dados.consultarSaldo();
-		
-		
-		if(tipoNum == 1) {
-			tipoDaConta = "Conta poupança";
-		}else {
-			tipoDaConta = "Conta corrente";
-		}
-		
-		dadosDaConta = "Titular: "+nomeTitular+ "\n Tipo da conta: " + tipoDaConta +
-						"\n Saldo: R$" +saldo ;
-		
-		JOptionPane.showMessageDialog(null, dadosDaConta);
-	}
-	
-	public void exibirExtratoCompleto() {
-		Conta extrato = new Conta();
-		String extratoGerado = extrato.gerarExtrato();
-		
-		JOptionPane.showMessageDialog(null, extratoGerado);
 	}
 	
 }

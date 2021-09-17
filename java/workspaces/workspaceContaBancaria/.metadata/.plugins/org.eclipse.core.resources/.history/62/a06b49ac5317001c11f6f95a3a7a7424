@@ -15,11 +15,13 @@ public class Conta {
 	
 	
 
-	public void criarConta(String nome, int tipo) {
+	public Conta(String nome, int tipo) {
 		titularDaConta = nome;
 		this.tipo = tipo;
 		this.saldo = 0;
 	}
+	
+	public Conta() {
 		
 	
 	public void depositar(int tipo, double valor, Date data) {
@@ -84,7 +86,7 @@ public class Conta {
 		}
 		
 		return extratoCompleto;
-		}	
+		}
+	}	
 }
-
 

@@ -13,14 +13,15 @@ public class Conta {
 	protected ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
 	
 	
-	
+	public Conta() {
+		
+	}
 
-	public void criarConta(String nome, int tipo) {
+	public Conta(String nome, int tipo) {
 		titularDaConta = nome;
 		this.tipo = tipo;
 		this.saldo = 0;
 	}
-		
 	
 	public void depositar(int tipo, double valor, Date data) {
 		
@@ -32,10 +33,9 @@ public class Conta {
 		listaDeMovimentacao.add(deposito);
 		deposito.setListaDeMovimentacao(listaDeMovimentacao);
 		
-		this.saldo += valor;
+		saldo += valor;
 		
 		JOptionPane.showMessageDialog(null ,"Valor depositado! =)");
-		System.out.println(saldo);
 	}
 	
 	public void sacar(int tipo, double valor, Date data) {
@@ -47,9 +47,9 @@ public class Conta {
 		listaDeMovimentacao.add(saque);
 		saque.setListaDeMovimentacao(listaDeMovimentacao);
 		
-		this.saldo -= valor;
+		saldo -= valor;
 		
-		JOptionPane.showMessageDialog(null ,"Valor sacado! =)");
+		JOptionPane.showMessageDialog(null ,"Valor depositado! =)");
 	}
 	
 	public double consultarSaldo() {
@@ -64,27 +64,6 @@ public class Conta {
 		return this.tipo;
 	}
 	
-	public String gerarExtrato() {
-		String extratoCompleto = "EXTRATO: \n";
-		
-		for(Movimentacao extrato : listaDeMovimentacao) {
-			int tipo = extrato.getTipo();
-			String tipoDaConta;
-			if(tipo == 1) {
-				tipoDaConta = "Saque";
-			}else {
-				tipoDaConta = "Depósito";
-			}
-			
-			double valor = extrato.getValor();
-			Date data = extrato.getData();
-			
-			extratoCompleto += "Operação: "+tipoDaConta+"\nValor: "+valor+"\nData: "+data;
-			extratoCompleto += "---------------------\n";
-		}
-		
-		return extratoCompleto;
-		}	
+	
+	
 }
-
-

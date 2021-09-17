@@ -1,0 +1,43 @@
+package modelo;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+
+public class Conta {
+	
+	protected String titularDaConta;
+	protected int tipo; // tipo de conta (1 - poupança, 2 - corrente)
+	protected double saldo;
+	protected ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	
+	
+	public Conta() {
+		
+	}
+
+	public Conta(String nome, int tipo) {
+		titularDaConta = nome;
+		this.tipo = tipo;
+		this.saldo = 0;
+	}
+	
+	public void depositar(int tipo, double valor, Date data) {
+		
+		Movimentacao deposito = new Movimentacao();
+		
+		deposito.setTipo(tipo);
+		deposito.setValor(valor);
+		deposito.setData(data);
+		listaDeMovimentacao.add(deposito);
+		deposito.setListaDeMovimentacao(listaDeMovimentacao);
+		
+		saldo += valor;
+		
+		JOptionPane.showMessageDialog(null ,"Valor depositado! =)");
+	}
+	
+	
+	
+}

@@ -31,7 +31,7 @@ public class Controladora {
 			break;
 			
 			case 2:
-				operacoes.exibirSaldo(conta);
+				operacoes.exibirSaldo();
 			break;
 			
 			case 3:

@@ -1,7 +1,6 @@
 package controle;
 
 import visualizacao.EntradaSaida;
-import modelo.Conta;
 
 public class Controladora {
 
@@ -9,18 +8,15 @@ public class Controladora {
 		
 		EntradaSaida criarConta = new EntradaSaida();
 		criarConta.solicitaDadosConta();
-		Conta conta = new Conta();
 		
 		EntradaSaida operacoes = new EntradaSaida();
 		
 		int opcao;
 		
-		
+		opcao = EntradaSaida.solicitaOpcao();
 		
 		
 		do {
-			opcao = EntradaSaida.solicitaOpcao();
-			
 			switch(opcao) {
 			case 0:
 				operacoes.solicitaInformacoesDeposito();
@@ -31,7 +27,7 @@ public class Controladora {
 			break;
 			
 			case 2:
-				operacoes.exibirSaldo(conta);
+				operacoes.exibirSaldo();
 			break;
 			
 			case 3:
@@ -43,7 +39,7 @@ public class Controladora {
 			break;
 			}
 			
-		}while(opcao != 7);
+		}while(opcao != 8);
 		
 		System.exit(0);
 		

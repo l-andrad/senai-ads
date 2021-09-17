@@ -30,9 +30,7 @@ public class EntradaSaida {
 			tipo = 1;
 		}
 		
-		Conta dadosDaConta = new Conta();
-		
-		dadosDaConta.criarConta(nome, tipo);
+		Conta dadosDaConta = new Conta(nome, tipo);
 		
 	}
 	
