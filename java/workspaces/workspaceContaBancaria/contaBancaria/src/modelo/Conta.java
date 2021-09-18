@@ -11,11 +11,14 @@ public class Conta {
 	protected int tipo; // tipo de conta (1 - poupança, 2 - corrente)
 	protected double saldo;
 	protected ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	protected Movimentacao movimentacao = new Movimentacao();
 	
-	
+	public Conta () {
+		
+	}
 	
 
-	public void criarConta(String nome, int tipo) {
+	public Conta(String nome, int tipo) {
 		titularDaConta = nome;
 		this.tipo = tipo;
 		this.saldo = 0;
@@ -23,19 +26,19 @@ public class Conta {
 		
 	
 	public void depositar(int tipo, double valor, Date data) {
-		
 		Movimentacao deposito = new Movimentacao();
 		
 		deposito.setTipo(tipo);
 		deposito.setValor(valor);
 		deposito.setData(data);
 		listaDeMovimentacao.add(deposito);
-		deposito.setListaDeMovimentacao(listaDeMovimentacao);
+		movimentacao.setListaDeMovimentacao(listaDeMovimentacao);
 		
 		this.saldo += valor;
 		
+		movimentacao.setSaldo(this.saldo);
+		
 		JOptionPane.showMessageDialog(null ,"Valor depositado! =)");
-		System.out.println(saldo);
 	}
 	
 	public void sacar(int tipo, double valor, Date data) {
@@ -49,11 +52,16 @@ public class Conta {
 		
 		this.saldo -= valor;
 		
+		movimentacao.setSaldo(this.saldo);
+		
 		JOptionPane.showMessageDialog(null ,"Valor sacado! =)");
 	}
 	
 	public double consultarSaldo() {
-		return this.saldo;
+		
+		double saldoAtual = movimentacao.getSaldo();
+
+		return saldoAtual;
 	}
 	
 	public String getTitularDaConta() {
@@ -64,10 +72,30 @@ public class Conta {
 		return this.tipo;
 	}
 	
+	public String gerarDadosDaConta() {
+		int tipoNum = this.tipo;
+		String tipoDaConta, dadosDaConta;
+		
+		if(tipoNum == 1) {
+			tipoDaConta = "Conta poupança";
+		}else {
+			tipoDaConta = "Conta corrente";
+		}
+		
+		dadosDaConta = "Titular: "+this.titularDaConta+ "\nTipo da conta: " + tipoDaConta +
+						"\nSaldo: R$" +this.saldo ;
+		
+		return dadosDaConta;
+	}
+	
 	public String gerarExtrato() {
 		String extratoCompleto = "EXTRATO: \n";
 		
-		for(Movimentacao extrato : listaDeMovimentacao) {
+		for(Movimentacao extrato : this.listaDeMovimentacao) {
+			
+			double valor = extrato.getValor();
+			Date data = extrato.getData();
+			
 			int tipo = extrato.getTipo();
 			String tipoDaConta;
 			if(tipo == 1) {
@@ -76,15 +104,33 @@ public class Conta {
 				tipoDaConta = "Depósito";
 			}
 			
-			double valor = extrato.getValor();
-			Date data = extrato.getData();
-			
-			extratoCompleto += "Operação: "+tipoDaConta+"\nValor: "+valor+"\nData: "+data;
-			extratoCompleto += "---------------------\n";
+			extratoCompleto += "Operação: "+tipoDaConta+"\nValor: R$"+valor+
+								"\nData: "+data;
+			extratoCompleto += "\n----------------------------\n";
 		}
 		
 		return extratoCompleto;
-		}	
+		}
+	
+	public String gerarExtratoDepositos() {
+		String extratoDepositos = "EXTRATO DEPÓSITOS: \n";
+		
+		for(Movimentacao extratoDeposito : this.listaDeMovimentacao) {
+			double valor;
+			Date data;
+			
+			int tipo = extratoDeposito.getTipo();
+			
+			if(tipo == 2) {
+				valor = extratoDeposito.getValor();
+				data = extratoDeposito.getData();
+				extratoDepositos += "Operação: Depósito\nValor: R$"+valor+
+									"\nData: "+data;
+				extratoDepositos += "\n----------------------------\n";
+			}
+		}
+		return extratoDepositos;
+	}
 }
 
 

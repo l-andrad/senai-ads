@@ -1,0 +1,114 @@
+package modelo;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+
+public class Conta {
+	
+	protected String titularDaConta;
+	protected int tipo; // tipo de conta (1 - poupança, 2 - corrente)
+	protected double saldo;
+	protected ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	protected Movimentacao movimentacao = new Movimentacao();
+	
+	public Conta () {
+		
+	}
+	
+
+	public Conta(String nome, int tipo) {
+		titularDaConta = nome;
+		this.tipo = tipo;
+		this.saldo = 0;
+	}
+		
+	
+	public void depositar(int tipo, double valor, Date data) {
+		
+		
+		movimentacao.setTipo(tipo);
+		movimentacao.setValor(valor);
+		movimentacao.setData(data);
+		listaDeMovimentacao.add(movimentacao);
+		movimentacao.setListaDeMovimentacao(listaDeMovimentacao);
+		
+		this.saldo += valor;
+		
+		movimentacao.setSaldo(this.saldo);
+		
+		JOptionPane.showMessageDialog(null ,"Valor depositado! =)");
+	}
+	
+	public void sacar(int tipo, double valor, Date data) {
+		
+		
+		movimentacao.setTipo(tipo);
+		movimentacao.setValor(valor);
+		movimentacao.setData(data);
+		listaDeMovimentacao.add(movimentacao);
+		movimentacao.setListaDeMovimentacao(listaDeMovimentacao);
+		
+		this.saldo -= valor;
+		
+		movimentacao.setSaldo(this.saldo);
+		
+		JOptionPane.showMessageDialog(null ,"Valor sacado! =)");
+	}
+	
+	public double consultarSaldo() {
+		
+		double saldoAtual = movimentacao.getSaldo();
+
+		return saldoAtual;
+	}
+	
+	public String getTitularDaConta() {
+		return this.titularDaConta;
+	}
+	
+	public int getTipo() {
+		return this.tipo;
+	}
+	
+	public String gerarDadosDaConta() {
+		int tipoNum = this.tipo;
+		String tipoDaConta, dadosDaConta;
+		
+		if(tipoNum == 1) {
+			tipoDaConta = "Conta poupança";
+		}else {
+			tipoDaConta = "Conta corrente";
+		}
+		
+		dadosDaConta = "Titular: "+this.titularDaConta+ "\nTipo da conta: " + tipoDaConta +
+						"\nSaldo: R$" +this.saldo ;
+		
+		return dadosDaConta;
+	}
+	
+	public String gerarExtrato() {
+		String extratoCompleto = "EXTRATO: \n";
+		
+		for(Movimentacao extrato : listaDeMovimentacao) {
+			int tipo = extrato.getTipo();
+			String tipoDaConta;
+			if(tipo == 1) {
+				tipoDaConta = "Saque";
+			}else {
+				tipoDaConta = "Depósito";
+			}
+			
+			double valor = extrato.getValor();
+			Date data = extrato.getData();
+			
+			extratoCompleto += "Operação: "+tipoDaConta+"\nValor: "+valor+"\nData: "+data;
+			extratoCompleto += "\n----------------------------\n";
+		}
+		
+		return extratoCompleto;
+		}	
+}
+
+

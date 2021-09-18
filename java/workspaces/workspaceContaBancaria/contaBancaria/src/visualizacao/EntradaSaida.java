@@ -10,8 +10,37 @@ import java.util.ArrayList;
 public class EntradaSaida {
 	
 	private ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	
+	public String solicitaTitularDaConta() {
+		String nome;
+		
+		nome = JOptionPane.showInputDialog("Informe o nome do titular da conta: ");
+		
+		return nome;
+	}
+	
+	public int solicitaTipoDaConta() {
+		int tipoSelecionado, tipo;
+		String opcoesConta[] = {"Conta corrente", "Conta poupança"};
+		
+		JComboBox<String> menuConta = new JComboBox<String> (opcoesConta);
+		
+		JOptionPane.showConfirmDialog(null, menuConta, 
+				"Selecione o tipo da conta: ", JOptionPane.OK_CANCEL_OPTION);
+		
+		tipoSelecionado = menuConta.getSelectedIndex();
+		
+		if(tipoSelecionado == 0) {
+			tipo = 2;
+		}else {
+			tipo = 1;
+		}
+		
+		return tipo;
+		
+	}
 
-	public void solicitaDadosConta(){
+	/*public void solicitaDadosConta(){
 		String nome;
 		int tipoSelecionado, tipo;
 		String opcoesConta[] = {"Conta corrente", "Conta poupança"};
@@ -30,11 +59,9 @@ public class EntradaSaida {
 			tipo = 1;
 		}
 		
-		Conta dadosDaConta = new Conta();
+		Conta dadosDaConta = new Conta(nome, tipo);
 		
-		dadosDaConta.criarConta(nome, tipo);
-		
-	}
+	} */
 	
 	public static int solicitaOpcao() {
 		
@@ -52,15 +79,14 @@ public class EntradaSaida {
 		return escolha;
 	}
 	
-	public void solicitaInformacoesDeposito() {
-		Conta deposito = new Conta();
+	public void solicitaInformacoesDeposito(Conta deposito) {
 		
 		int tipo = 2;
 		double valor;
 		Date data;
 		
 		valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o "
-				+ "valor a ser depositado"));
+				+ "valor a ser depositado:"));
 		
 		data = new Date();
 		
@@ -68,15 +94,14 @@ public class EntradaSaida {
 		
 	}
 	
-	public void solicitaInformacoesSaque() {
-		Conta saque = new Conta();
+	public void solicitaInformacoesSaque(Conta saque) {
 		
 		int tipo = 1;
 		double valor;
 		Date data;
 		
 		valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o "
-				+ "valor a ser sacado"));
+				+ "valor a ser sacado:"));
 		
 		data = new Date();
 		
@@ -91,32 +116,27 @@ public class EntradaSaida {
 		JOptionPane.showMessageDialog(null, "Seu saldo atual é de: R$" +saldoAtual);
 	}
 	
-	public void exibirDadosDaConta() {
-		Conta dados = new Conta();
+	public void exibirDadosDaConta(Conta dados) {
 		
-		String nomeTitular = dados.getTitularDaConta();
-		int tipoNum = dados.getTipo();
-		String tipoDaConta, dadosDaConta;
-		double saldo = dados.consultarSaldo();
+		String dadosAtuais;
 		
+		dadosAtuais = dados.gerarDadosDaConta();
 		
-		if(tipoNum == 1) {
-			tipoDaConta = "Conta poupança";
-		}else {
-			tipoDaConta = "Conta corrente";
-		}
-		
-		dadosDaConta = "Titular: "+nomeTitular+ "\n Tipo da conta: " + tipoDaConta +
-						"\n Saldo: R$" +saldo ;
-		
-		JOptionPane.showMessageDialog(null, dadosDaConta);
+		JOptionPane.showMessageDialog(null, dadosAtuais);
 	}
 	
-	public void exibirExtratoCompleto() {
-		Conta extrato = new Conta();
+	public void exibirExtratoCompleto(Conta extrato) {
+		
 		String extratoGerado = extrato.gerarExtrato();
 		
 		JOptionPane.showMessageDialog(null, extratoGerado);
+	}
+	
+	public void exibirExtratoDeDepositos(Conta extratoDepositos) {
+		
+		String extratoDepositosGerado = extratoDepositos.gerarExtratoDepositos();
+		
+		JOptionPane.showMessageDialog(null, extratoDepositosGerado);
 	}
 	
 }

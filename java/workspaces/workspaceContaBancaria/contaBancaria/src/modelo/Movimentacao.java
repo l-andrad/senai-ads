@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 public class Movimentacao {
 
-	private int tipo;
-	private double valor;
-	private Date data;
-	private ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	protected int tipo;
+	protected double valor;
+	protected Date data;
+	protected double saldo;
+	protected ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
 	
 	public int getTipo() {
 		return this.tipo;
@@ -32,6 +33,14 @@ public class Movimentacao {
 	
 	public void setData(Date data) {
 		this.data = data;
+	}
+	
+	public double getSaldo() {
+		return this.saldo;
+	}
+	
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
 	}
 	
 	public ArrayList<Movimentacao> getListaDeMovimentacao(){

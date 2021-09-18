@@ -8,8 +8,9 @@ public class Controladora {
 	public void exibirMenu() {
 		
 		EntradaSaida criarConta = new EntradaSaida();
-		criarConta.solicitaDadosConta();
-		Conta conta = new Conta();
+		String nome = criarConta.solicitaTitularDaConta();
+		int tipo = criarConta.solicitaTipoDaConta();
+		Conta conta = new Conta(nome, tipo);
 		
 		EntradaSaida operacoes = new EntradaSaida();
 		
@@ -23,11 +24,11 @@ public class Controladora {
 			
 			switch(opcao) {
 			case 0:
-				operacoes.solicitaInformacoesDeposito();
+				operacoes.solicitaInformacoesDeposito(conta);
 			break;
 		
 			case 1:
-				operacoes.solicitaInformacoesSaque();
+				operacoes.solicitaInformacoesSaque(conta);
 			break;
 			
 			case 2:
@@ -35,12 +36,15 @@ public class Controladora {
 			break;
 			
 			case 3:
-				operacoes.exibirDadosDaConta();
+				operacoes.exibirDadosDaConta(conta);
 			break;
 			
 			case 4:
-				operacoes.exibirExtratoCompleto();
+				operacoes.exibirExtratoCompleto(conta);
 			break;
+			
+			case 5:
+				operacoes.exibirExtratoDeDepositos(conta);
 			}
 			
 		}while(opcao != 7);
