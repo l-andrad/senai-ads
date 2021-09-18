@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="modelo.Divisao"/>
+    <fullyQualifiedTypeName name="modelo.Multiplicacao"/>
+    <fullyQualifiedTypeName name="modelo.Operacoes"/>
+    <fullyQualifiedTypeName name="modelo.Soma"/>
+    <fullyQualifiedTypeName name="modelo.Subtracao"/>
+    <fullyQualifiedTypeName name="controle.Controladora"/>
+    <fullyQualifiedTypeName name="modelo.Porta"/>
+    <fullyQualifiedTypeName name="modelo.Janela"/>
+    <fullyQualifiedTypeName name="modelo.Casa"/>
+    <fullyQualifiedTypeName name="modelo.Aberturas"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="visualizacao.EntradaSaida"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+</qualifiedTypeNameHistroy>

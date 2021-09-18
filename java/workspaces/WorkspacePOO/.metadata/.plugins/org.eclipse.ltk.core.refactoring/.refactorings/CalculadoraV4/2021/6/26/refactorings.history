@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 7 elements to &apos;CalculadoraV5/src&apos;&#x0A;- Original project: &apos;CalculadoraV4&apos;&#x0A;- Destination element: &apos;CalculadoraV5/src&apos;&#x0A;- Original elements:&#x0A;     EntradaSaida.java&#x0A;     Multiplicacao.java&#x0A;     Soma.java&#x0A;     Principal.java&#x0A;     Operacoes.java&#x0A;     Subtracao.java&#x0A;     Divisao.java" description="Copy compilation units" destination="=CalculadoraV5/src" element1="/src&lt;{EntradaSaida.java" element2="/src&lt;{Multiplicacao.java" element3="/src&lt;{Soma.java" element4="/src&lt;{Principal.java" element5="/src&lt;{Operacoes.java" element6="/src&lt;{Subtracao.java" element7="/src&lt;{Divisao.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1624312517230" units="7" version="1.0"/>
+</session>
