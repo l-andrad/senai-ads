@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract method &apos;public static void solicitaPesos(double [] pesos, int i)&apos; from &apos;lista3Metodos.Exercicio2.mediaPonderada(...)&apos; to &apos;lista3Metodos.Exercicio2&apos;&#x0A;- Original project: &apos;Metodos&apos;&#x0A;- Method name: &apos;solicitaPesos&apos;&#x0A;- Destination type: &apos;lista3Metodos.Exercicio2&apos;&#x0A;- Declared visibility: &apos;public&apos;" comments="false" description="Extract method &apos;solicitaPesos&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;lista3Metodos{Exercicio2.java" name="solicitaPesos" replace="false" selection="2417 110" stamp="1622155965891" version="1.0" visibility="1"/>
+</session>
