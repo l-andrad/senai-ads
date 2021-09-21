@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
 
@@ -12,6 +13,7 @@ public class Conta {
 	protected double saldo;
 	protected ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
 	protected Movimentacao movimentacao = new Movimentacao();
+	protected DecimalFormat df = new DecimalFormat("0.00");
 	
 	public Conta () {
 		
@@ -44,17 +46,25 @@ public class Conta {
 	public void sacar(int tipo, double valor, Date data) {
 		Movimentacao saque = new Movimentacao();
 		
-		saque.setTipo(tipo);
-		saque.setValor(valor);
-		saque.setData(data);
-		listaDeMovimentacao.add(saque);
-		saque.setListaDeMovimentacao(listaDeMovimentacao);
+		if((this.saldo - valor) < -1000) {
+			JOptionPane.showMessageDialog(null, "Esse saque ultrapassa o limite"
+												+ " de-R$1.000,00 que a conta "
+												+ "pode ficar negativada!");
+		}else {
+			saque.setTipo(tipo);
+			saque.setValor(valor);
+			saque.setData(data);
+			listaDeMovimentacao.add(saque);
+			saque.setListaDeMovimentacao(listaDeMovimentacao);
+			
+			this.saldo -= valor;
+			
+			movimentacao.setSaldo(this.saldo);
+			
+			JOptionPane.showMessageDialog(null ,"Valor sacado! =)");
+		}
 		
-		this.saldo -= valor;
 		
-		movimentacao.setSaldo(this.saldo);
-		
-		JOptionPane.showMessageDialog(null ,"Valor sacado! =)");
 	}
 	
 	public double consultarSaldo() {
@@ -62,14 +72,6 @@ public class Conta {
 		double saldoAtual = movimentacao.getSaldo();
 
 		return saldoAtual;
-	}
-	
-	public String getTitularDaConta() {
-		return this.titularDaConta;
-	}
-	
-	public int getTipo() {
-		return this.tipo;
 	}
 	
 	public String gerarDadosDaConta() {
@@ -82,14 +84,14 @@ public class Conta {
 			tipoDaConta = "Conta corrente";
 		}
 		
-		dadosDaConta = "Titular: "+this.titularDaConta+ "\nTipo da conta: " + tipoDaConta +
-						"\nSaldo: R$" +this.saldo ;
+		dadosDaConta = "Titular: "+this.titularDaConta+ "\nTipo da conta: " 
+						+ tipoDaConta +"\nSaldo: R$" +df.format(this.saldo) ;
 		
 		return dadosDaConta;
 	}
 	
 	public String gerarExtrato() {
-		String extratoCompleto = "EXTRATO: \n";
+		String extratoCompleto = "";
 		
 		for(Movimentacao extrato : this.listaDeMovimentacao) {
 			
@@ -104,16 +106,16 @@ public class Conta {
 				tipoDaConta = "Depósito";
 			}
 			
-			extratoCompleto += "Operação: "+tipoDaConta+"\nValor: R$"+valor+
-								"\nData: "+data;
-			extratoCompleto += "\n----------------------------\n";
+			extratoCompleto += "EXTRATO: \nOperação: "+tipoDaConta+"\nValor: R$"
+								+df.format(valor)+"\nData: "+data;
+			extratoCompleto += "\n-----------------------------\n";
 		}
 		
 		return extratoCompleto;
 		}
 	
 	public String gerarExtratoDepositos() {
-		String extratoDepositos = "EXTRATO DEPÓSITOS: \n";
+		String extratoDepositos = "";
 		
 		for(Movimentacao extratoDeposito : this.listaDeMovimentacao) {
 			double valor;
@@ -124,13 +126,34 @@ public class Conta {
 			if(tipo == 2) {
 				valor = extratoDeposito.getValor();
 				data = extratoDeposito.getData();
-				extratoDepositos += "Operação: Depósito\nValor: R$"+valor+
+				extratoDepositos += "EXTRATO DEPÓSITOS: \nOperação: Depósito\nValor: R$"+df.format(valor)+
 									"\nData: "+data;
-				extratoDepositos += "\n----------------------------\n";
+				extratoDepositos += "\n-----------------------------\n";
 			}
 		}
 		return extratoDepositos;
 	}
+	
+	public String gerarExtratoSaques() {
+		String extratoSaques = "";
+		
+		for(Movimentacao extratoSaque : this.listaDeMovimentacao) {
+			double valor;
+			Date data;
+			
+			int tipo = extratoSaque.getTipo();
+			
+			if(tipo == 1) {
+				valor = extratoSaque.getValor();
+				data = extratoSaque.getData();
+				extratoSaques += "EXTRATO SAQUES: \nOperação: Saque\nValor: R$"+df.format(valor)+
+								 "\nData: "+data;
+				extratoSaques += "\n-----------------------------\n";
+			}
+		}
+		return extratoSaques;
+	}
+	
 }
 
 

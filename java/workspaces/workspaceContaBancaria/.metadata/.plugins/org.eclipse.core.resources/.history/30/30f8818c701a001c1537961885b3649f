@@ -1,0 +1,159 @@
+package modelo;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.text.DecimalFormat;
+
+import javax.swing.JOptionPane;
+
+public class Conta {
+	
+	protected String titularDaConta;
+	protected int tipo; // tipo de conta (1 - poupança, 2 - corrente)
+	protected double saldo;
+	protected ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	protected Movimentacao movimentacao = new Movimentacao();
+	protected DecimalFormat df = new DecimalFormat("0.00");
+	
+	public Conta () {
+		
+	}
+	
+
+	public Conta(String nome, int tipo) {
+		titularDaConta = nome;
+		this.tipo = tipo;
+		this.saldo = 0;
+	}
+		
+	
+	public void depositar(int tipo, double valor, Date data) {
+		Movimentacao deposito = new Movimentacao();
+		
+		deposito.setTipo(tipo);
+		deposito.setValor(valor);
+		deposito.setData(data);
+		listaDeMovimentacao.add(deposito);
+		movimentacao.setListaDeMovimentacao(listaDeMovimentacao);
+		
+		this.saldo += valor;
+		
+		movimentacao.setSaldo(this.saldo);
+		
+		JOptionPane.showMessageDialog(null ,"Valor depositado! =)");
+	}
+	
+	public void sacar(int tipo, double valor, Date data) {
+		Movimentacao saque = new Movimentacao();
+		
+		if((this.saldo - valor) < -1000) {
+			JOptionPane.showMessageDialog(null, "Esse saque ultrapassa o limite"
+												+ " de-R$1.000,00 que a conta "
+												+ "pode ficar negativada!");
+		}else {
+			saque.setTipo(tipo);
+			saque.setValor(valor);
+			saque.setData(data);
+			listaDeMovimentacao.add(saque);
+			saque.setListaDeMovimentacao(listaDeMovimentacao);
+			
+			this.saldo -= valor;
+			
+			movimentacao.setSaldo(this.saldo);
+			
+			JOptionPane.showMessageDialog(null ,"Valor sacado! =)");
+		}
+		
+		
+	}
+	
+	public double consultarSaldo() {
+		
+		double saldoAtual = movimentacao.getSaldo();
+
+		return saldoAtual;
+	}
+	
+	public String gerarDadosDaConta() {
+		int tipoNum = this.tipo;
+		String tipoDaConta, dadosDaConta;
+		
+		if(tipoNum == 1) {
+			tipoDaConta = "Conta poupança";
+		}else {
+			tipoDaConta = "Conta corrente";
+		}
+		
+		dadosDaConta = "Titular: "+this.titularDaConta+ "\nTipo da conta: " 
+						+ tipoDaConta +"\nSaldo: R$" +df.format(this.saldo) ;
+		
+		return dadosDaConta;
+	}
+	
+	public String gerarExtrato() {
+		String extratoCompleto = null;
+		
+		for(Movimentacao extrato : this.listaDeMovimentacao) {
+			
+			double valor = extrato.getValor();
+			Date data = extrato.getData();
+			
+			int tipo = extrato.getTipo();
+			String tipoDaConta;
+			if(tipo == 1) {
+				tipoDaConta = "Saque";
+			}else {
+				tipoDaConta = "Depósito";
+			}
+			
+			extratoCompleto += "EXTRATO: \nOperação: "+tipoDaConta+"\nValor: R$"
+								+df.format(valor)+"\nData: "+data;
+			extratoCompleto += "\n-----------------------------\n";
+		}
+		
+		return extratoCompleto;
+		}
+	
+	public String gerarExtratoDepositos() {
+		String extratoDepositos = null;
+		
+		for(Movimentacao extratoDeposito : this.listaDeMovimentacao) {
+			double valor;
+			Date data;
+			
+			int tipo = extratoDeposito.getTipo();
+			
+			if(tipo == 2) {
+				valor = extratoDeposito.getValor();
+				data = extratoDeposito.getData();
+				extratoDepositos += "EXTRATO DEPÓSITOS: \nOperação: Depósito\nValor: R$"+df.format(valor)+
+									"\nData: "+data;
+				extratoDepositos += "\n-----------------------------\n";
+			}
+		}
+		return extratoDepositos;
+	}
+	
+	public String gerarExtratoSaques() {
+		String extratoSaques;
+		
+		for(Movimentacao extratoSaque : this.listaDeMovimentacao) {
+			double valor;
+			Date data;
+			
+			int tipo = extratoSaque.getTipo();
+			
+			if(tipo == 1) {
+				valor = extratoSaque.getValor();
+				data = extratoSaque.getData();
+				extratoSaques += "EXTRATO SAQUES: \nOperação: Saque\nValor: R$"+df.format(valor)+
+								 "\nData: "+data;
+				extratoSaques += "\n-----------------------------\n";
+			}
+		}
+		return extratoSaques;
+	}
+	
+}
+
+

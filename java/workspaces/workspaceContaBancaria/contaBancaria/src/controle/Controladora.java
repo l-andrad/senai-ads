@@ -45,9 +45,16 @@ public class Controladora {
 			
 			case 5:
 				operacoes.exibirExtratoDeDepositos(conta);
+			break;
+			
+			case 6:
+				operacoes.exibirExtratoDeSaques(conta);
+			break;
 			}
 			
 		}while(opcao != 7);
+		
+		operacoes.exibirMsgEncerraPrograma();
 		
 		System.exit(0);
 		

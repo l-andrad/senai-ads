@@ -5,11 +5,11 @@ import modelo.*;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import java.util.Date;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class EntradaSaida {
 	
-	private ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	private DecimalFormat df = new DecimalFormat("0.00");
 	
 	public String solicitaTitularDaConta() {
 		String nome;
@@ -113,7 +113,7 @@ public class EntradaSaida {
 		
 		double saldoAtual = saldo.consultarSaldo();
 		
-		JOptionPane.showMessageDialog(null, "Seu saldo atual é de: R$" +saldoAtual);
+		JOptionPane.showMessageDialog(null, "Seu saldo atual é de: R$" + df.format(saldoAtual));
 	}
 	
 	public void exibirDadosDaConta(Conta dados) {
@@ -129,14 +129,36 @@ public class EntradaSaida {
 		
 		String extratoGerado = extrato.gerarExtrato();
 		
-		JOptionPane.showMessageDialog(null, extratoGerado);
+		if(extratoGerado == "") {
+			JOptionPane.showMessageDialog(null, "Nenhuma movimentação encontrada!");
+		}else {
+			JOptionPane.showMessageDialog(null, extratoGerado);
+		}
 	}
 	
 	public void exibirExtratoDeDepositos(Conta extratoDepositos) {
 		
 		String extratoDepositosGerado = extratoDepositos.gerarExtratoDepositos();
 		
-		JOptionPane.showMessageDialog(null, extratoDepositosGerado);
+		if(extratoDepositosGerado == "") {
+			JOptionPane.showMessageDialog(null, "Nenhum depósito encontrado!");
+		}else {
+			JOptionPane.showMessageDialog(null, extratoDepositosGerado);
+		}
+	}
+	
+	public void exibirExtratoDeSaques(Conta extratoSaques) {
+		String extratoSaquesGerado = extratoSaques.gerarExtratoSaques();
+		
+		if(extratoSaquesGerado == "") {
+			JOptionPane.showMessageDialog(null, "Nenhum saque encontrado!");
+		}else {
+			JOptionPane.showMessageDialog(null, extratoSaquesGerado);
+		}	
+	}
+	
+	public void exibirMsgEncerraPrograma() {
+		JOptionPane.showMessageDialog(null, "O programa será encerrado!");
 	}
 	
 }
