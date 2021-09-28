@@ -1,9 +1,0 @@
-package controle;
-
-public class Controladora {
-
-	public static void exibirMenu() {
-		
-	}
-	
-}
