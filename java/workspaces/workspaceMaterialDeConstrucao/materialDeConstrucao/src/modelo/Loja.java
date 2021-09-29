@@ -2,9 +2,8 @@ package modelo;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import java.text.DecimalFormat;
+import java.util.Date;
 
 public class Loja {
 
@@ -64,11 +63,61 @@ public class Loja {
 		int codigoProduto, qtdeProduto;
 		
 		for(Produto estoque : listaDeProdutos) {
-				codigoProduto = estoque.getCodigo();
-				qtdeProduto = estoque.getQuantidade();
-				qtdeProduto += qtdeInformada;
-				estoque.setQuantidade(qtdeProduto);
+			codigoProduto = estoque.getCodigo();
+			if(codigoProduto == codigoInformado) {
+					qtdeProduto = estoque.getQuantidade();
+					qtdeProduto += qtdeInformada;
+					estoque.setQuantidade(qtdeProduto);
+			}		
 		}
+	}
+	
+	public boolean verificaEstoque(int codigoInformado, int qtdeInformada) {
+		int codigoProduto, qtdeProduto;
+		boolean verificaEstoque = false;
+		
+		for (Produto estoque : listaDeProdutos) {
+			codigoProduto = estoque.getCodigo();
+			qtdeProduto = estoque.getQuantidade();
+			
+			if((codigoProduto == codigoInformado) && (qtdeProduto == qtdeInformada)) {
+				verificaEstoque = true;
+			}
+		}
+		return verificaEstoque;
+	}
+	
+	public void venderProduto(int codigoInformado, int qtdeInformada) {
+		int codigoProduto, qtdeProduto;
+		String descricaoProduto;
+		double precoProduto, valorTotalVenda;
+		Date dataVenda;
+		
+		for(Produto venda : listaDeProdutos) {
+			codigoProduto = venda.getCodigo();
+			qtdeProduto = venda.getQuantidade();
+			
+			if(codigoProduto == codigoInformado) {
+				Venda vender = new Venda();
+				descricaoProduto = venda.getDescricao();
+				dataVenda = new Date();
+				precoProduto = venda.getPreco();
+				
+				qtdeProduto -= qtdeInformada;
+				valorTotalVenda = precoProduto * qtdeInformada;
+				
+				vender.setDescricao(descricaoProduto);
+				vender.setData(dataVenda);
+				vender.setQuantidade(qtdeInformada);
+				vender.setValorTotal(valorTotalVenda);
+				listaDeCupons.add(vender);
+				
+				venda.setQuantidade(qtdeProduto);
+			}
+		}
+		
+		
+		
 	}
 
 }

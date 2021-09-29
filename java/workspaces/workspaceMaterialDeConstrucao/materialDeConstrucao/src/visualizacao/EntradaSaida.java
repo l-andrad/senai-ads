@@ -72,4 +72,37 @@ public class EntradaSaida {
 		}
 	}
 	
+	public static void solicitaInformacoesVenda(Loja venda) {
+		int codigo, quantidade;
+		boolean verificaProduto = false;
+		boolean verificaEstoque = false;
+		
+		codigo = Integer.parseInt(JOptionPane.showInputDialog("Insira o código "
+				+ "do produto que quer comprar:"));
+		
+		verificaProduto = venda.verificaExistenciaProduto(codigo);
+		
+		if(verificaProduto == false) {
+			JOptionPane.showMessageDialog(null, "O produto não está cadastrado!");
+		}else {
+			quantidade = Integer.parseInt(JOptionPane.showInputDialog("Insira a "
+					+ "quantidade que deseja comprar:"));
+			
+			while(quantidade <= 0) {
+				JOptionPane.showMessageDialog(null, "Informa uma quantidade maior que zero!");
+				
+				quantidade = Integer.parseInt(JOptionPane.showInputDialog("Insira a "
+						+ "quantidade que deseja comprar:"));
+			}
+			
+			verificaEstoque = venda.verificaEstoque(codigo, quantidade);
+			
+			if(verificaEstoque == true) {
+				venda.venderProduto(codigo, quantidade);
+			}else {
+				JOptionPane.showMessageDialog(null, "Estoque insuficiente!");
+			}
+		}
+	}
+	
 }

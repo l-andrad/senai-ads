@@ -3,10 +3,19 @@ package modelo;
 import java.util.Date;
 
 public class Venda {
-
+	
+	String descricao;
 	double valorTotal;
 	Date data;
 	int quantidade;
+	
+	public String getDescricao() {
+		return this.descricao;
+	}
+	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 	
 	public double getValorTotal() {
 		return this.valorTotal;

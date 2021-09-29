@@ -23,6 +23,11 @@ public class Controladora {
 			
 			case 2:
 				EntradaSaida.adicionarEstoque(loja);
+			break;
+			
+			case 3:
+				EntradaSaida.solicitaInformacoesVenda(loja);
+			break;
 			}
 		}while(opcao != 7);
 	}
