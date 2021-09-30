@@ -61,6 +61,8 @@ public class Conta {
 			
 			JOptionPane.showMessageDialog(null ,"Valor sacado! =)");
 		}
+		
+		
 	}
 	
 	public double consultarSaldo() {
@@ -108,7 +110,6 @@ public class Conta {
 		}
 		
 		return extratoCompleto;
-		
 		}
 	
 	public String gerarExtratoDepositos() {

@@ -108,7 +108,6 @@ public class Conta {
 		}
 		
 		return extratoCompleto;
-		
 		}
 	
 	public String gerarExtratoDepositos() {

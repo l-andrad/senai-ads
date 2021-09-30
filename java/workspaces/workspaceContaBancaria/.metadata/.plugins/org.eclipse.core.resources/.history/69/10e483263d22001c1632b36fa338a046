@@ -11,8 +11,13 @@ public class Controladora {
 		String nome = criarConta.solicitaTitularDaConta();
 		int tipo = criarConta.solicitaTipoDaConta();
 		Conta conta = new Conta(nome, tipo);
+		
 		EntradaSaida operacoes = new EntradaSaida();
+		
 		int opcao;
+		
+		
+		
 		
 		do {
 			opcao = EntradaSaida.solicitaOpcao();

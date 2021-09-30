@@ -19,12 +19,14 @@ public class Conta {
 		
 	}
 	
+
 	public Conta(String nome, int tipo) {
 		titularDaConta = nome;
 		this.tipo = tipo;
 		this.saldo = 0;
 	}
 		
+	
 	public void depositar(int tipo, double valor, Date data) {
 		Movimentacao deposito = new Movimentacao();
 		
@@ -61,6 +63,8 @@ public class Conta {
 			
 			JOptionPane.showMessageDialog(null ,"Valor sacado! =)");
 		}
+		
+		
 	}
 	
 	public double consultarSaldo() {
@@ -108,7 +112,6 @@ public class Conta {
 		}
 		
 		return extratoCompleto;
-		
 		}
 	
 	public String gerarExtratoDepositos() {
