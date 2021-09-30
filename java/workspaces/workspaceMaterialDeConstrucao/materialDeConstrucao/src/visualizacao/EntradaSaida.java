@@ -1,15 +1,11 @@
 package visualizacao;
 
-import java.text.DecimalFormat;
-
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import modelo.Loja;
 
 public class EntradaSaida {
-	
-	private DecimalFormat df = new DecimalFormat("0.00");
 
 
 	public static int solicitaOpcao() {
@@ -168,7 +164,6 @@ public class EntradaSaida {
 	}
 	
 	public static void exibirValorTotalDasVendas(Loja totalVendas) {
-		double valorTotalVendas;
 		boolean listaVazia = false;
 		String textoFinal;
 		
