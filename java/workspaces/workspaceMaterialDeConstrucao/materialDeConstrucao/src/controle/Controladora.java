@@ -28,8 +28,24 @@ public class Controladora {
 			case 3:
 				EntradaSaida.solicitaInformacoesVenda(loja);
 			break;
+			
+			case 4:
+				EntradaSaida.exibirListaEstoque(loja);
+			break;
+			
+			case 5:
+				EntradaSaida.exibirListaCupomFiscal(loja);
+			break;
+			
+			case 6:
+				EntradaSaida.exibirValorTotalDasVendas(loja);
+			break;
 			}
 		}while(opcao != 7);
+		
+		EntradaSaida.exibirMsgEncerraPrograma();
+		
+		System.exit(0);
 	}
 	
 }
