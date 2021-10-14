@@ -7,7 +7,6 @@ import modelo.Loja;
 
 public class EntradaSaida {
 
-
 	public static int solicitaOpcao() {
 		String[] opcoes = {"Cadastrar produto", "Produtos cadastrados",
 				"Abastecer estoque", "Vender produto", "Produtos em estoque",
@@ -57,7 +56,7 @@ public class EntradaSaida {
 
 	}
 
-	public static void adicionarEstoque(Loja estoque) {
+	public static void solicitarInformacoesEstoque(Loja estoque) {
 		int codigoInformado, qtdeInformado;
 		boolean verificadorProduto = false;
 		boolean listaVazia = false;
@@ -128,6 +127,7 @@ public class EntradaSaida {
 
 				if(verificaEstoque == true) {
 					venda.venderProduto(codigo, quantidade);
+					JOptionPane.showMessageDialog(null, "Produto vendido! =)");
 				}else {
 					JOptionPane.showMessageDialog(null, "Estoque insuficiente!");
 				}

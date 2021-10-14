@@ -22,7 +22,7 @@ public class Controladora {
 			break;
 			
 			case 2:
-				EntradaSaida.adicionarEstoque(loja);
+				EntradaSaida.solicitarInformacoesEstoque(loja);
 			break;
 			
 			case 3:

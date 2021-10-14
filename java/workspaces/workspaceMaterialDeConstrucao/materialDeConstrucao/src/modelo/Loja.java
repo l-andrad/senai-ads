@@ -143,7 +143,6 @@ public class Loja {
 				venda.setQuantidade(qtdeProduto);
 			}
 		}
-		JOptionPane.showMessageDialog(null, "Produto vendido! =)");
 	}
 
 	public String gerarListaEstoque() {
