@@ -4,12 +4,37 @@
 
 body {
 	margin: 0 auto;
-	font-family: "Century Gothic", sans-serif;
+	font-family: appleSFProDisplay_regular;
 }
 
 /************************************
 		Configurações gerais
 ************************************/
+
+/* Fontes */
+@font-face {
+  font-family: appleRegularFont;
+  src: url(fonts/SF-Pro-Text-Regular.otf);
+  font-weight: bold;
+}
+
+@font-face {
+	font-family: appleRegularSemi_boldFont;
+	src: url(fonts/SFNSText-Semibold.otf);
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: appleSFProDisplay_regular;
+	src: url(fonts/SF-Pro-Display-Regular.otf);
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: appleSFProDisplay_bold;
+	src: url(fonts/SF-Pro-Display-Bold.otf);
+	font-weight: bold;
+}
 /* Cabeçalho */
 header {
 	height: 170px;
@@ -25,7 +50,7 @@ header img {
 
 header h1 {
 	float: left;
-	margin: 50px 0 0 30px;
+	margin: 50px 0 0 10px;
 	font-size: 60px;
 	color: #ffffff;
 }
@@ -73,4 +98,159 @@ footer {
 	color: #ffffff;
 	text-align: center;
 	padding: 10px;
+}
+
+/*************************************
+		Configs da Home
+*************************************/
+
+#img-home img {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	width: 100%;
+	height: 526px;
+	position: relative;
+}
+
+#text-home h2 {
+	position: absolute;
+	top: 270px;
+	left: 435px;
+	font-size: 65px;
+}
+
+#text-home .moreButton {
+	position: absolute;
+	top: 450px;
+	left: 670px;
+	color: #2997ff;
+	font-size: 25px;
+	text-decoration: none;
+	font-family: appleSFProDisplay_regular;
+}
+
+#text-home .fa-chevron-right {
+	padding-left: 4px;
+	font-size: 19px;
+}
+
+#text-home .moreButton:hover {
+	text-decoration: underline;
+}
+
+/**********************************
+		Configs da página blog
+**********************************/
+
+#blog-content-1 {
+	display: flex;
+}
+
+#img-blog img {
+	width: 600px;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+
+#img-blog {
+	
+}
+
+#txt-blog {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+#txt-blog h2 {
+	font-family: appleSFProDisplay_bold;
+	font-size: 50px;
+}
+
+#txt-blog p {
+	text-align: left;
+	font-size: 22px;
+	text-align: justify;
+}
+
+table {
+	border: 1px solid #000000;
+}
+
+#lancamentos {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	margin: 50px 50px;
+}
+
+.tituloTabela {
+	font-size: 25px;
+	font-family: appleSFProDisplay_bold;
+}
+
+tr, th, td {
+	padding: 5px;
+	
+}
+
+td {
+	font-family: appleSFProDisplay_regular;
+	font-size: 17px;
+}
+
+tr:nth-child(odd) {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+/*********************************
+	Página de inscrição
+*********************************/
+
+#sectionSubscribe {
+	padding-bottom: 50px;
+}
+
+#sectionSubscribe h2, #sectionSubscribe p{
+	text-align: center;
+	padding-top: 20px;
+}
+
+#sectionSubscribe h2{
+	font-family: appleSFProDisplay_bold;
+	font-size: 50px;
+}
+
+#sectionSubscribe p {
+	font-size: 22px;
+}
+
+.subscribe{
+	width: 400px;
+	margin: 0px auto;
+	font-weight: bold;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+.subscribe input{
+	margin: 5px auto;
+	width: 100%;
+	padding: 10px 0;
+}
+
+#feminino, #masculino, #assinatura {
+	width: 10%;
+	margin-top: 10px;
+}
+
+.subscribe button{
+	width: 30%;
+	margin: 20px 10%;
+	background-color: #000000;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 16px;
 }

@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Subscribe - Apple Fan Club</title>
 <link rel="stylesheet" type="text/css" href="../../css/site.css">
+<link rel="icon" href="../../imgs/logo.png">
 </head>
 <body>
 	<header>
@@ -19,8 +20,34 @@
 		<a href="blog.html"><div class="opcao">Blog</div></a>
 		<a href="subscribe.html"><div class="opcao">Inscreva-se</div></a>
 	</nav>
-	<section>
-		
+	<section id="sectionSubscribe">
+		<h2>Inscreva-se!</h2>
+		<p>Deseja fazer parte do nosso fã clube? Preencha este formulário e venha
+		   fazer parte!
+		</p>
+		<form name="frmsubscribe" method="post" action="#">
+			<fieldset class="subscribe">
+				<legend>Dados pessoais:</legend>
+				<label for="nome">Nome:</label>
+				<input type="text" name="txtnome" id="nome">
+				<label for="sexo">Sexo:</label> <br>
+				<input type="radio" name="sexo" id="masculino"> 
+				<label for="masculino">Masculino</label> <br>
+				<input type="radio" name="sexo" id="feminino"> 
+				<label for="feminino">Feminino</label>
+			</fieldset>
+			<fieldset class="subscribe">
+				<legend>Dados de contato:</legend>
+				<label for="fone">Telefone:</label>
+				<input type="tel" name="fone" id="fone" pattern="[0-9]{7}-[0-9]{4}">
+				<label for="email">E-mail:</label>
+				<input type="email" name="email" id="email">
+				<input type="checkbox" id="assinatura" name="assinatura">
+				<label>Desejo participar do fã clube</label>
+				<button type="reset">Limpar</button><button type="submit">Enviar</button>
+			</fieldset>
+			
+		</form>
 	</section>
 	<footer>Copyright &copy; Apple Inc. 2021</footer>
 </body>
