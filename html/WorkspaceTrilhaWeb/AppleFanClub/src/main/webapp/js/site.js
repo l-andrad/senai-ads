@@ -16,6 +16,16 @@ function validaSubscribe(){
 		document.frmsubscribe.txtnome.focus();
 		return false;
 	}
+	
+	var cpf = document.frmsubscribe.cpf.value;
+	var expRegCpf = new RegExp("^[0-9]{3}[.]{1}[0-9]{3}[.]{1}[0-9]{3}[-]{1}[0-9]{2}$")
+	
+	if(!expRegCpf.test(cpf)){
+		alert("Preencha o campo CPF corretamente.")
+		document.frmsubscribe.cpf.focus();
+		return false;
+	}
+	
 	if(document.frmsubscribe.sexo.value == ""){
 		alert("Preencha o campo Sexo.");
 		return false;
@@ -25,9 +35,14 @@ function validaSubscribe(){
 		document.frmsubscribe.fone.focus();
 		return false;
 	}
-	if(document.frmsubscribe.email.value == ""){
-		alert("Preencha o campo Email.");
+	
+	var email = document.frmsubscribe.email.value;
+	var expRegEmail = new RegExp("^[a-z]{1,}[@]{1}[a-z]{1,}[.]{1}[a-z]{1,}$");
+	
+	if(!expRegEmail.test(email)){
+		alert("Preencha o campo E-mail corretamente.");
 		document.frmsubscribe.email.focus();
 		return false;
 	}
+	
 }

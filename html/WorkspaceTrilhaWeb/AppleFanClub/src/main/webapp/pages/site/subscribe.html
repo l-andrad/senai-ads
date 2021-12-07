@@ -30,7 +30,9 @@
 			<fieldset class="subscribe">
 				<legend>Dados pessoais:</legend>
 				<label for="nome">Nome:</label>
-				<input type="text" name="txtnome" id="nome">
+				<input type="text" name="txtnome" id="nome" placeholder="Nome completo">
+				<label for="cpf">CPF:</label>
+				<input type="text" name="txtcpf" id="cpf" placeholder="000.000.000-00">
 				<label for="sexo">Sexo:</label> <br>
 				<input type="radio" name="sexo" id="masculino" value="2"> 
 				<label for="masculino">Masculino</label> <br>
@@ -42,7 +44,7 @@
 				<label for="fone">Telefone:</label>
 				<input type="tel" name="fone" id="fone" pattern="[0-9]{7}-[0-9]{4}">
 				<label for="email">E-mail:</label>
-				<input type="email" name="email" id="email">
+				<input type="email" name="email" id="email" placeholder="exemplo@exemplo.com">
 				<input onclick="buttonEnabled()" type="checkbox" id="assinatura" name="assinatura" value="assinatura">
 				<label>Desejo participar do fã clube</label>
 				<button id="limpar" type="reset">Limpar</button><button id="envio" value="enviar" type="submit">Enviar</button>
