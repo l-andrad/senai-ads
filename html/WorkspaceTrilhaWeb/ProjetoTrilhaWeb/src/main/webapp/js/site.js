@@ -120,3 +120,11 @@ function verificaMotivo(motivo){
 		elemento.removeChild(elemento.firstChild);
 	}
 }//fim da função verificaMotivo
+
+//Assim que o documento HTML for carregado por completo...
+$(document).ready(function() {
+	//Carrega cabeçalho, menu e rodapé aos respectivos locais
+	$("header").load("/ProjetoTrilhaWeb/pages/site/general/cabecalho.html");
+	$("nav").load("/ProjetoTrilhaWeb/pages/site/general/menu.html");
+	$("footer").load("/ProjetoTrilhaWeb/pages/site/general/rodape.html");
+});

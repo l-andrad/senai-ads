@@ -46,3 +46,9 @@ function validaSubscribe(){
 	}
 	
 }
+
+$(document).ready(function() {
+	$("header").load("/AppleFanClub/pages/site/general/cabecalho.html");
+	$("nav").load("/AppleFanClub/pages/site/general/menu.html");
+	$("footer").load("/AppleFanClub/pages/site/general/rodape.html");
+})
