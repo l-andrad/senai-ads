@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script>function validaContato() {
+	var nome = document.frmcontato.nome.value;
+	
+	if(nome == ""){
+		alert("Preencha o campo Nome.");
+		document.frmcontato.nome.focus();
+		return false;
+	}
+	
+var endereco = document.frmcontato.end.value;
+	
+	if(endereco == ""){
+		alert("Preencha o campo Endereço.");
+		document.frmcontato.end.focus();
+		return false;
+	}
+	
+var telefone = document.frmcontato.tel.value;
+	
+	if(telefone == ""){
+		alert("Preencha o campo Telefone.");
+		document.frmcontato.tel.focus();
+		return false;
+	}
+}
+</script>
+</head>
+<body>
+	<form class="forms" name="frmcontato" action="insereContato" onsubmit="return validaContato()">
+		<fieldset>
+			<legend>Contato</legend>
+			<table>
+				<tr>
+					<td><label for="nome">Nome:</label></td>
+					<td><input type="text" name="nome" id="nome"></td>
+				</tr>
+				<tr>
+					<td><label for="endereco">Endereço:</label></td>
+					<td><input type="text" name="end" id="endereco"></td>
+				</tr>
+				<tr>
+					<td><label for="telefone">Telefone:</label></td>
+					<td><input type="text" name="tel" id="telefone"></td>
+				</tr>
+				<tr>
+					<td><button id="envio" value="enviar" type="submit">Enviar</button></td>
+					<td><button id="limpar" type="reset">Limpar</button></td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+</body>
+</html>
