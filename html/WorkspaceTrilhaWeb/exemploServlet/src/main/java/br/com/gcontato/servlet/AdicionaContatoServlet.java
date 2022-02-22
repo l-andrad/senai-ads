@@ -27,6 +27,7 @@ public class AdicionaContatoServlet extends HttpServlet {
 		out.println("<html><body><h2>Nome: " + nome + "</h2>"
 					+ "<h3>Endereço: " + endereco + "</h3>" 
 					+ "<h3>Telefone: " + telefone + "</h3></body></html>");
+		out.println("Visualizando alterações no repositório");
 		
 	}
 	
