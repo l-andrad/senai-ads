@@ -13,6 +13,9 @@ $(document).ready(function() {
 	//Função para carregamento de páginas de conteúdo, que
 	//recebe como parâmetro o nome da pasta com a página a ser carregada
 	COLDIGO.carregaPagina = function(pagename) {
+		//Remove o conteúdo criado na abertura de uma janela modal pelo jQueryUI
+		if($(".ui-dialog"))
+		   $(".ui-dialog").remove();	
 		//Limpa a tag section, excluindo todo o conteúdo de dentro dela
 		$("section").empty();
 		//Carrega a página solicitada dentro da tag section
@@ -45,4 +48,25 @@ $(document).ready(function() {
 		$("#modalAviso").html(aviso);
 		$("#modalAviso").dialog(modal);
 	};
+	
+	COLDIGO.verificaExclusao = function(msg) {
+					const aviso = "Deseja realmente excluir este produto?";
+					var modalExclusao = {
+						title: "Mensagem",
+						heigth: 250,
+						width: 400,
+						modal: true,
+						buttons: {
+							"OK": function() {
+									COLDIGO.exibirAviso(msg);
+									COLDIGO.produto.buscar();
+							},
+							"Cancelar": function() {
+								$(this).dialog("close");
+							}
+						}
+					};
+					$("#modalAviso").html(aviso);
+					$("#modalAviso").dialog(modalExclusao);
+				}
 });
