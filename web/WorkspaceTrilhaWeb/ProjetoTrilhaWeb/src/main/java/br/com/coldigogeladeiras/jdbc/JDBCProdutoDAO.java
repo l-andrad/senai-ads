@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import br.com.coldigogeladeiras.jdbcinterface.ProdutoDAO;
 import br.com.coldigogeladeiras.modelo.Produto;
 
 
-public class JDBCProdutoDAO {
+public class JDBCProdutoDAO implements ProdutoDAO{
 	
 	private Connection conexao;
 	

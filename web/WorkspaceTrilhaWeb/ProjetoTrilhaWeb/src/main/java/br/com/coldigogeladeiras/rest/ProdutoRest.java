@@ -61,7 +61,6 @@ public class ProdutoRest extends UtilRest {
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorNome(@QueryParam("valorBusca") String nome) {
-		
 		try {
 			
 			List<JsonObject> listaProdutos = new ArrayList<JsonObject>();
