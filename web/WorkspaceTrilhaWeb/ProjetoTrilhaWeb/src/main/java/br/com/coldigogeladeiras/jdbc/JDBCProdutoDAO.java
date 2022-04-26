@@ -12,84 +12,136 @@ import com.google.gson.JsonObject;
 
 import br.com.coldigogeladeiras.jdbcinterface.ProdutoDAO;
 import br.com.coldigogeladeiras.modelo.Produto;
+import br.com.coldigogeladeiras.modelo.Marca;
 
+public class JDBCProdutoDAO implements ProdutoDAO {
 
-public class JDBCProdutoDAO implements ProdutoDAO{
-	
 	private Connection conexao;
-	
+
 	public JDBCProdutoDAO(Connection conexao) {
 		this.conexao = conexao;
 	}
-	
-	public boolean inserir(Produto produto) {
-		
-		String comando = "INSERT INTO produtos "
-				+ "(id, categoria, modelo, capacidade, valor, marcas_id) "
+
+	public int inserir(Produto produto) {
+
+		String comandoInsert = "INSERT INTO produtos " + "(id, categoria, modelo, capacidade, valor, marcas_id) "
 				+ "VALUES (?,?,?,?,?,?)";
+		String comandoSelect = "SELECT * FROM marcas WHERE id = ?";
+		String comandoSelectAll = "SELECT * FROM produtos";
+		Marca marca = null;
+		Produto produtoModelo = null;
 		PreparedStatement p;
-		
+		ResultSet rs;
+		int retorno = 0;
+		int count = 0;
+
 		try {
-			
-			//Prepara o comando para execução no BD em que nos conectamos
-			p = this.conexao.prepareStatement(comando);
-			
-			//Substitui no comando os "?" pelos valores do produto
-			p.setInt(1, produto.getId());
-			p.setString(2, produto.getCategoria());
-			p.setString(3, produto.getModelo());
-			p.setInt(4, produto.getCapacidade());
-			p.setFloat(5, produto.getValor());
-			p.setInt(6, produto.getMarcaId());
-			
-			//Executa o comando no BD
-			p.execute();
-			
+
+			p = this.conexao.prepareStatement(comandoSelectAll);
+
+			rs = p.executeQuery();
+
+			while (rs.next()) {
+				String modelo = rs.getString("modelo");
+				
+				produtoModelo = new Produto();
+
+				produtoModelo.setModelo(modelo);
+
+				if (produtoModelo.getModelo().equals(produto.getModelo())) {
+					count++;
+				}
+			}
+
+			if (count > 0) {
+				retorno = 4;
+			} else {
+				p = this.conexao.prepareStatement(comandoSelect);
+
+				p.setInt(1, produto.getMarcaId());
+				rs = p.executeQuery();
+
+				while (rs.next()) {
+					String nome = rs.getString("nome");
+					int idMarca = rs.getInt("id");
+					int status = rs.getInt("status");
+					
+					marca = new Marca();
+
+					marca.setId(idMarca);
+					marca.setNome(nome);
+					marca.setStatus(status);
+				}
+
+				if (marca == null) {
+					retorno = 1;
+				} else if (marca.getStatus() == 0) {
+					retorno = 5;
+				}else {
+					retorno = 2;
+					// Prepara o comando para execução no BD em que nos conectamos
+					p = this.conexao.prepareStatement(comandoInsert);
+
+					// Substitui no comando os "?" pelos valores do produto
+					p.setInt(1, produto.getId());
+					p.setString(2, produto.getCategoria());
+					p.setString(3, produto.getModelo());
+					p.setInt(4, produto.getCapacidade());
+					p.setFloat(5, produto.getValor());
+					p.setInt(6, produto.getMarcaId());
+
+					// Executa o comando no BD
+					p.execute();
+				}
+
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			retorno = 3;
 		}
-		return true;
+		return retorno;
 	}
-	
+
 	public List<JsonObject> buscarPorNome(String nome) {
-		
-		//Inicia criação do comando SQL de busca
+
+		// Inicia criação do comando SQL de busca
 		String comando = "SELECT produtos.*, marcas.nome as marca FROM produtos "
 				+ "INNER JOIN marcas ON produtos.marcas_id = marcas.id ";
-		//Se o nome não estiver vazio...
+		// Se o nome não estiver vazio...
 		if (!nome.equals("")) {
-			//concatena no comando o WHERE buscando no nome do produto
-			//o texto da variável nome
+			// concatena no comando o WHERE buscando no nome do produto
+			// o texto da variável nome
 			comando += "WHERE modelo LIKE '%" + nome + "%' ";
 		}
-		//Finaliza o comando ordenando alfabeticamente por
-		//categoria, marca e depois modelo.
+		// Finaliza o comando ordenando alfabeticamente por
+		// categoria, marca e depois modelo.
 		comando += "ORDER BY categoria ASC, marcas.nome ASC, modelo ASC";
-		
-		List<JsonObject> listaProdutos = new ArrayList<JsonObject>();
+
+		List<JsonObject> listaProdutos = null;
 		JsonObject produto = null;
-		
+
 		try {
-			
+
 			Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
-			
-			while(rs.next()) {
-				
+
+			listaProdutos = new ArrayList<JsonObject>();
+
+			while (rs.next()) {
+
 				int id = rs.getInt("id");
 				String categoria = rs.getString("categoria");
 				String modelo = rs.getString("modelo");
 				int capacidade = rs.getInt("capacidade");
 				float valor = rs.getFloat("valor");
 				String marcaNome = rs.getString("marca");
-				
+
 				if (categoria.equals("1")) {
 					categoria = "Geladeira";
 				} else if (categoria.equals("2")) {
 					categoria = "Freezer";
 				}
-				
+
 				produto = new JsonObject();
 				produto.addProperty("id", id);
 				produto.addProperty("categoria", categoria);
@@ -97,19 +149,19 @@ public class JDBCProdutoDAO implements ProdutoDAO{
 				produto.addProperty("capacidade", capacidade);
 				produto.addProperty("valor", valor);
 				produto.addProperty("marcaNome", marcaNome);
-				
+
 				listaProdutos.add(produto);
-				
+
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return listaProdutos;
-		
+
 	}
-	
+
 	public boolean deletar(int id) {
 		String comando = "DELETE FROM produtos WHERE id = ?";
 		PreparedStatement p;
@@ -123,40 +175,40 @@ public class JDBCProdutoDAO implements ProdutoDAO{
 		}
 		return true;
 	}
-	
+
 	public Produto buscarPorId(int id) {
 		String comando = "SELECT * FROM produtos WHERE produtos.id = ?";
-		Produto produto = new Produto();
+		Produto produto = null;
 		try {
 			PreparedStatement p = this.conexao.prepareStatement(comando);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
-			while(rs.next()) {
-				
+			produto = new Produto();
+			while (rs.next()) {
+
 				String categoria = rs.getString("categoria");
 				String modelo = rs.getString("modelo");
 				int capacidade = rs.getInt("capacidade");
 				float valor = rs.getFloat("valor");
 				int marcaId = rs.getInt("marcas_id");
-				
+
 				produto.setId(id);
 				produto.setCategoria(categoria);
 				produto.setMarcaId(marcaId);
 				produto.setModelo(modelo);
 				produto.setCapacidade(capacidade);
 				produto.setValor(valor);
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return produto;
 	}
-	
+
 	public boolean alterar(Produto produto) {
-		
-		String comando = "UPDATE produtos "
-				+ "SET categoria=?, modelo=?, capacidade=?, valor=?, marcas_id=?"
+
+		String comando = "UPDATE produtos " + "SET categoria=?, modelo=?, capacidade=?, valor=?, marcas_id=?"
 				+ " WHERE id=?";
 		PreparedStatement p;
 		try {
@@ -168,11 +220,11 @@ public class JDBCProdutoDAO implements ProdutoDAO{
 			p.setInt(5, produto.getMarcaId());
 			p.setInt(6, produto.getId());
 			p.executeUpdate();
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
-		
+
 	}
 }

@@ -24,14 +24,18 @@ $(document).ready(function() {
 					$(select).append(option);
 
 					for (var i = 0; i < marcas.length; i++) {
-						var option = document.createElement("option");
-						option.setAttribute("value", marcas[i].id);
 
-						if ((id != undefined) && (id == marcas[i].id))
-							option.setAttribute("selected", "selected");
+						if ((marcas[i].status != 0) && (select == "#selMarca")) {
 
-						option.innerHTML = (marcas[i].nome);
-						$(select).append(option);
+							var option = document.createElement("option");
+							option.setAttribute("value", marcas[i].id);
+
+							if ((id != undefined) && (id == marcas[i].id))
+								option.setAttribute("selected", "selected");
+
+							option.innerHTML = (marcas[i].nome);
+							$(select).append(option);
+						}
 					}
 
 				} else {
@@ -48,7 +52,7 @@ $(document).ready(function() {
 			},
 			error: function(info) {
 
-				COLDIGO.exibirAviso("Erro ao buscar as marcas: " + info.status + " - " + info.statusText);
+				COLDIGO.exibirAviso("Erro: " + info.status + " - " + info.responseText);
 
 				$(select).html("");
 				var option = document.createElement("option");
@@ -74,6 +78,7 @@ $(document).ready(function() {
 		produto.capacidade = document.frmAddProduto.capacidade.value;
 		produto.valor = document.frmAddProduto.valor.value;
 
+
 		if ((produto.categoria == "") || (produto.marcaId == "") || (produto.modelo == "")
 			|| (produto.capacidade == "") || (produto.valor == "")) {
 			COLDIGO.exibirAviso("Preencha todos os campos!");
@@ -85,14 +90,17 @@ $(document).ready(function() {
 				data: JSON.stringify(produto),
 				success: function(msg) {
 					COLDIGO.exibirAviso(msg);
+					COLDIGO.produto.buscar();
 					$("#addProduto").trigger("reset");
 				},
 				error: function(info) {
-					COLDIGO.exibirAviso("Erro ao cadastrar um novo produto: " + info.status + " - " + info.statusText);
+					COLDIGO.exibirAviso("Erro: " + info.status + " - " + info.responseText);
 				}
 			});
 
 		}
+
+
 	}
 
 	//Busca no BD e exibe na página os produtos que atendam à solicitação do usuário
@@ -112,7 +120,7 @@ $(document).ready(function() {
 
 			},
 			error: function(info) {
-				COLDIGO.exibirAviso("Erro ao consultar os produtos: " + info.status + " - " + info.statusText);
+				COLDIGO.exibirAviso("Erro: " + info.status + " - " + info.responseText);
 			}
 		});
 
@@ -158,7 +166,7 @@ $(document).ready(function() {
 
 	//Executa a função de busca ao carregar a página
 	COLDIGO.produto.buscar();
-	
+
 	COLDIGO.produto.verificaExclusao = function(id) {
 		var aviso = "Deseja realmente excluir este produto?";
 		var modalExclusao = {
@@ -176,7 +184,7 @@ $(document).ready(function() {
 			}
 		};
 		$("#modalAviso").html(aviso);
-		$("#modalAviso").dialog(modalExclusao);	
+		$("#modalAviso").dialog(modalExclusao);
 	};
 
 	//Exclui o produto selecionado
@@ -187,10 +195,10 @@ $(document).ready(function() {
 			success: function(msg) {
 				COLDIGO.exibirAviso(msg);
 				COLDIGO.produto.buscar();
-				
+
 			},
 			error: function(info) {
-				COLDIGO.exibirAviso("Erro ao excluir produto: " + info.status + " - " + info.statusText);
+				COLDIGO.exibirAviso("Erro: " + info.status + " - " + info.responseText);
 			}
 		});
 	};
@@ -242,7 +250,7 @@ $(document).ready(function() {
 				$("#modalEditaProduto").dialog(modalEditaProduto);
 			},
 			error: function(info) {
-				COLDIGO.exibirAviso("Erro ao buscar produto para edição: " + info.status + " - " + info.statusText);
+				COLDIGO.exibirAviso("Erro: " + info.status + " - " + info.responseText);
 			}
 		});
 	};
@@ -268,11 +276,26 @@ $(document).ready(function() {
 				$("#modalEditaProduto").dialog("close");
 			},
 			error: function(info) {
-				COLDIGO.exibirAviso("Erro ao editar produto: " + info.status + " - " + info.statusText);
+				COLDIGO.exibirAviso("Erro: " + info.status + " - " + info.responseText);
 
 			}
 		});
 
 	};
+
+	COLDIGO.produto.consultaStatus = function(id) {
+
+		$.ajax({
+			type: "GET",
+			url: COLDIGO.PATH + "marca/consultaStatus" + id,
+			success: function(dados) {
+				console.log(dados)
+				dados = JSON.parse(dados)
+			},
+			error: function(info) {
+				COLDIGO.exibirAviso("Erro: " + info.status + " - " + info.responseText);
+			}
+		})
+	}
 
 });

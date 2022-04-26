@@ -37,18 +37,31 @@ public class ProdutoRest extends UtilRest {
 			Connection conexao = conec.abrirConexao();
 			
 			JDBCProdutoDAO jdbcProduto = new JDBCProdutoDAO(conexao);
-			boolean retorno = jdbcProduto.inserir(produto);
+			int retorno = jdbcProduto.inserir(produto);
 			String msg = "";
+			Response resposta;
 			
-			if(retorno) {
+			if(retorno == 1) {
+				msg = "A marca selecionada foi excluída/inativada, atualize a página para "
+						+ "ver as alterações";
+				resposta = this.buildErrorResponse(msg);
+			} else if (retorno == 2) {
 				msg = "Produto cadastrado com sucesso!";
-			} else {
+				resposta = this.buildResponse(msg);
+			} else if (retorno == 5) {
+				msg = "A marca selecionada foi inativada, por favor selecione outra!";
+				resposta = this.buildErrorResponse(msg);
+			}else if(retorno == 4) {
+				msg = "Já existe um produto cadastrado com esse modelo!";
+				resposta = this.buildErrorResponse(msg);
+			}else {
 				msg = "Erro ao cadastrar produto.";
+				resposta = this.buildErrorResponse(msg);
 			}
 			
 			conec.fecharConexao();
 			
-			return this.buildResponse(msg);
+			return resposta;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,9 +83,17 @@ public class ProdutoRest extends UtilRest {
 			JDBCProdutoDAO jdbcProduto = new JDBCProdutoDAO(conexao);
 			listaProdutos = jdbcProduto.buscarPorNome(nome);
 			conec.fecharConexao();
+			Response resposta;
 			
 			String json = new Gson().toJson(listaProdutos);
-			return this.buildResponse(json);
+			
+			if(listaProdutos == null) {
+				resposta = this.buildErrorResponse("Não foi possível consultar os produtos.");
+			}else {
+				resposta = this.buildResponse(json);
+			}
+			
+			return resposta;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,19 +111,24 @@ public class ProdutoRest extends UtilRest {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCProdutoDAO jdbcProduto = new JDBCProdutoDAO(conexao);
+			Response resposta;
 			
 			boolean retorno = jdbcProduto.deletar(id);
 			
 			String msg = "";
 			if(retorno) {
 				msg = "Produto excluído com sucesso!";
+				resposta = this.buildResponse(msg);
+				
 			} else {
 				msg = "Erro ao excluir produto.";
+				resposta = this.buildErrorResponse(msg);
+				
 			}
 			
 			conec.fecharConexao();
 			
-			return this.buildResponse(msg);
+			return resposta;
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -122,12 +148,20 @@ public class ProdutoRest extends UtilRest {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCProdutoDAO jdbcProduto = new JDBCProdutoDAO(conexao);
+			Response resposta;
 			
 			produto = jdbcProduto.buscarPorId(id);
 			
+			if(produto == null) {
+				resposta = this.buildErrorResponse("Não foi possível buscar o produto.");
+			}else {
+				resposta = this.buildResponse(produto);
+			}
+			
 			conec.fecharConexao();
 			
-			return this.buildResponse(produto);
+			return resposta;
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -143,18 +177,23 @@ public class ProdutoRest extends UtilRest {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCProdutoDAO jdbcProduto = new JDBCProdutoDAO(conexao);
+			Response resposta;
 			
 			boolean retorno = jdbcProduto.alterar(produto);
 			
 			String msg = "";
 			if(retorno) {
 				msg = "Produto alterado com sucesso!";
+				resposta = this.buildResponse(msg);
 			}else {
 				msg = "Erro ao alterar produto.";
+				resposta = this.buildErrorResponse(msg);
 			}
 			
 			conec.fecharConexao();
-			return this.buildResponse(msg);
+			
+			return resposta;
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
