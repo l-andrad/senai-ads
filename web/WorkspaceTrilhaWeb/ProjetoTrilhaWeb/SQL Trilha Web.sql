@@ -20,9 +20,24 @@ CREATE TABLE IF NOT EXISTS produtos (
         REFERENCES marcas (id)
 );
 
+ALTER TABLE marcas ADD status TINYINT(1) NOT NULL DEFAULT 1;
+
 SELECT * FROM bdcoldigo.produtos;
 SELECT * FROM bdcoldigo.marcas;
 
-INSERT INTO marcas (nome) VALUES ("Philips");
+SELECT * FROM marcas WHERE marcas.nome LIKE '%a%' ORDER BY marcas.nome DESC;
 
+SELECT produtos.*, marcas.nome as marca FROM produtos INNER JOIN marcas ON produtos.marcas_id = marcas.id;
+
+INSERT INTO marcas (nome) VALUES ("Consul");
+
+SELECT * FROM produtos WHERE produtos.marcas_id = 9;
+
+DELETE FROM bdcoldigo.marcas WHERE id = 9 AND produtos.marcas_id != 9;
+
+SELECT * FROM marcas WHERE id = 8;
+
+UPDATE marcas SET status = 0 WHERE id = 8;
+
+DELETE FROM marcas WHERE id = 11
 
