@@ -1,0 +1,78 @@
+/* Menu - Navbar */
+
+.menu-dark .bg-dark {
+    background-color: black !important;
+    justify-content: center;
+}
+
+.navbar-dark .navbar-brand {
+    font-size: 35px;
+}
+
+.navbar-dark .navbar-brand .purple-part {
+    color: #9900FF;
+}
+
+.navbar-dark .navbar-brand .white-part {
+    color: white;
+}
+
+/* Menu - Links */
+
+.navbar-dark .navbar-nav .nav-link {
+    font-size: 17px !important;
+    margin-left: 60px;
+}
+
+.navbar-dark .navbar-nav .disabled-perfil {
+    color: white !important;
+}
+
+.navbar-dark .navbar-nav .menu-icons img {
+    width: 28px;
+    margin-right: 5px;
+}
+
+.navbar-dark .navbar-nav .li-user {
+    margin-left: 20px;
+}
+
+.navbar-dark .navbar-nav .li-user .divider {
+    padding-left: 10px;
+    height: 30px;
+}
+
+.navbar-dark .navbar-nav .link-logout {
+    margin-left: 0px;
+}
+
+/* Section */
+
+section {
+    height: 615px;
+}
+
+.welcome-home {
+    text-align: center;
+    justify-content: center;
+    margin-top: 50px;
+    color: black;
+    font-size: 45px;
+}
+
+.welcome-home .purple-part {
+    color: #9900FF;
+}
+
+/* Footer */
+
+.footer-home {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 50px;
+    align-content: center;
+    justify-content: center;
+}

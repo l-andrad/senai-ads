@@ -1,0 +1,133 @@
+body {
+    background-color: rgb(0, 0, 0) !important;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(../fonts/LeagueSpartan-Bold.otf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: mySecondFontRegular;
+    src: url(../fonts/GlacialIndifference-Regular.otf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: mySecondFontBold;
+    src: url(../fonts/GlacialIndifference-Bold.otf);
+    font-weight: bold;
+}
+
+.login {
+    background-color: rgb(255, 255, 255);
+    height: 500px;
+    width: 400px;
+    margin-top: 100px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.login h1 {
+    font-size: 35px;
+    font-family: 'myFirstFont';
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-login label {
+    margin-bottom: 20px;
+    font-family: 'mySecondFontRegular';
+}
+
+.form-login .label-info {
+    font-size: 20px;
+}
+
+.form-login .forget-link {
+    color: black;
+}
+
+.form-login .forget-link:hover {
+    color: #9900FF;
+}
+
+.form-login input {
+    width: 300px;
+    height: 35px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border-style: groove ;
+    border-color: black;
+    outline-color: #9900FF;
+    padding-left: 10px;
+}
+
+.form-login input::placeholder {
+    font-family: 'mySecondFontRegular';
+    color: black;
+    
+}
+
+.form-login .button-form {
+    padding-top: 20px;
+}
+
+.button-form .btn-dark {
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    border-radius: 4px;
+    width: 150px;
+    height: 40px;
+    font-family: 'mySecondFontRegular';
+    font-size: 20px;
+    background: black;
+    color: white;
+    border-color: black;
+}
+
+.button-form .btn-dark:hover {
+    background-color: #9900FF;
+    border-color: #9900FF;
+}
+
+.button-form .btn-dark a {
+    text-decoration: none;
+    color: white;
+}
+
+.logo {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+
+.logo h1 {
+    font-size: 50px;
+    color: white;
+}
+
+.logo .purple-part {
+    color: #9900FF;
+}

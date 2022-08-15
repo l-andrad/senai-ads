@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="js/envia.js"></script>
+
+    <title>Login</title>
+</head>
+
+<body>
+    <section>
+        <div class="login">
+            <h1>LOGIN</h1>
+
+            <form action="autenticar" method="POST" name="frmLogin" class="form-login" onsubmit="return ValidaDados()">
+                <label class="label-info" for="">Insira seu usuário e senha</label>
+                <div class="inputs">
+                    <input type="text" class="input-user" placeholder="Usuário" name="usuario" id="usuario">
+                    <input type="password" class="input-password" placeholder="Senha" name="senha" id="senha">
+                </div>
+                <label for=""><a href="" class="forget-link">Esqueceu sua senha?</a></label>
+                <div class="button-form"><button onclick="printName()" type="submit" class="btn btn-dark"
+                        id="login">Entrar</button></div>
+            </form>
+        </div>
+        <div class="logo">
+            <h1><span class="purple-part">&lt;</span>Code<span class="purple-part">Bakery</span>&gt;</h1>
+        </div>
+    </section>
+</body>
+
+</html>
