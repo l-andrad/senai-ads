@@ -51,7 +51,7 @@
 	<classpathentry kind="lib" path="/Users/lucas_andrade/Documents/GitHub/senai-ads/web/WorkspaceTrilhaWeb/ProjetoTrilhaWeb/src/main/webapp/WEB-INF/lib/osgi-resource-locator-1.0.3.jar"/>
 	<classpathentry kind="lib" path="/Users/lucas_andrade/Documents/GitHub/senai-ads/web/WorkspaceTrilhaWeb/ProjetoTrilhaWeb/src/main/webapp/WEB-INF/lib/yasson-1.0.9.jar"/>
 	<classpathentry kind="lib" path="/Users/lucas_andrade/Documents/GitHub/senai-ads/segurança/projtrilhaseguranca/src/main/webapp/WEB-INF/lib/gson-2.9.0.jar"/>
-	<classpathentry kind="lib" path="/Users/lucas_andrade/Documents/GitHub/senai-ads/segurança/projtrilhaseguranca/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.28.jar"/>
+	<classpathentry kind="lib" path="/Users/lucas_andrade/Documents/GitHub/senai-ads/segurança/projtrilhaseguranca/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.28.jar"/>
 	<classpathentry kind="lib" path="/Users/lucas_andrade/Documents/GitHub/senai-ads/segurança/projtrilhaseguranca/src/main/webapp/WEB-INF/lib/javax.ws.rs-api-2.0-sources.jar"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>

@@ -22,20 +22,21 @@ public class AutenticacaoServlet extends HttpServlet {
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
 
+        String salt = "";
+
+        ArmaDadosUsuario dadosautentica = new ArmaDadosUsuario();
+
         Conexao conec = new Conexao();
         Connection conexao = (Connection) conec.abrirConexao();
         JDBCAutenticaDAO getSalt = new JDBCAutenticaDAO(conexao);
 
-        String salt = getSalt.consultarSalt(request.getParameter("usuario"));
+        salt = getSalt.consultarSalt(request.getParameter("usuario"));
 
         String senhaDigitada = request.getParameter("senha");
 
         String senhaComSalt = senhaDigitada + salt;
 
-        ArmaDadosUsuario dadosautentica = new ArmaDadosUsuario();
-
         dadosautentica.setUsuario(request.getParameter("usuario"));
-        
 
         String senmd5 = "";
         MessageDigest md = null;
@@ -65,7 +66,8 @@ public class AutenticacaoServlet extends HttpServlet {
          */
         BigInteger hash = new BigInteger(1, md.digest(senhaComSalt.getBytes()));
         /*
-         * Converte esta representação em String para que possa armazenar a senha neste formato.
+         * Converte esta representação em String para que possa armazenar a senha neste
+         * formato.
          */
         senmd5 = hash.toString(16);
         dadosautentica.setSenha(senmd5);

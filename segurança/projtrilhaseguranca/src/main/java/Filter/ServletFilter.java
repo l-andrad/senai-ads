@@ -36,7 +36,6 @@ public class ServletFilter implements Filter{
          */
 
         String context = request.getServletContext().getContextPath();
-        System.out.println(context);
 
         try {
 
@@ -63,11 +62,14 @@ public class ServletFilter implements Filter{
             if (session != null) {
                 // Atribua o valor do login de quem se logou a variável usuario
                 usuario = (String) session.getAttribute("login");
+                System.out.println("teste");
+                System.out.println(usuario);
             }
             // Verificando se usuário é nulo
             if (usuario == null) {
                 // Se for redireciona para a apresentação da mensagem de erro.
                 ((HttpServletResponse) response).sendRedirect("http://localhost:8080/projtrilhaseguranca/erro.html");
+                session.invalidate();
             } else {
                 /*
                  * Se não for nulo, o programa deve prosseguir seu processamento lá no Servlet,
@@ -85,6 +87,6 @@ public class ServletFilter implements Filter{
     // Executa a destruição do Filtro.
 
     public void destroy() {
-
+            
     }
 }
